@@ -1,5 +1,13 @@
 .bottom {
   overflow-y: auto;
+  $bg-clr: hsl(120, 100%, 75%);
+  background: $bg-clr;
+  background: linear-gradient(
+    to right,
+    lighten($bg-clr, 4%),
+    lighten($bg-clr, 7.5%),
+    $bg-clr
+  );
   
   ul {
     user-select: none;
@@ -17,6 +25,11 @@
       color: white;
       border-radius: 5px;
       padding: 0.5em;
+      
+
+      &:hover {
+        filter: hue-rotate(45deg);
+      }
     }
   }
 }
@@ -40,4 +53,8 @@ task-info {
   height: var(--delete-btn-size);
   width: var(--delete-btn-size);
   cursor: pointer;
+
+  &:hover {
+    color: lighten(red, 5%);
+  }
 }

@@ -19,17 +19,14 @@ export default class TaskList extends HTMLUListElement {
 
   private addItem(task: TaskInterface): void {
     this.append(
-      li({
-        "data-timestamp": task.timestamp,
-        innerHTML: [
-          new TaskInfo(task),
-          span({
-            class: "delete-btn grid center",
-            innerHTML: "×",
-            onclick: e => this.handleDelete(<HTMLElement>e.target, task.timestamp)
-          })
-        ]
-      })
+      li([
+        new TaskInfo(task),
+        span({
+          class: "delete-btn grid center",
+          innerHTML: "×",
+          onclick: e => this.handleDelete(<HTMLElement>e.target, task.timestamp)
+        })
+      ])
     );
   }
 

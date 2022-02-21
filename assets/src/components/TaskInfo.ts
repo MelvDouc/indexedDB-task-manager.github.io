@@ -10,15 +10,14 @@ export default class TaskInfo extends HTMLElement {
       div(task.text),
       p(task.dueDate)
     );
-    this.addEventListener("dblclick", (e) => {
-      this.toggleDone(<HTMLElement>e.target, task.timestamp);
+    this.addEventListener("dblclick", () => {
+      this.toggleDone(task.timestamp);
     });
   }
 
-  private toggleDone(target: HTMLElement, id: number): void {
-    const parent = target.closest(`.task-info`) as HTMLElement;
-    const done = parent.dataset.done === "true";
-    parent.dataset.done = (done) ? "" : "true";
+  private toggleDone(id: number): void {
+    const done = this.dataset.done === "true";
+    this.dataset.done = (done) ? "" : "true";
     App.dispatch(App.EventList.TASK_UPDATE, { id, done: !done });
   }
 }
