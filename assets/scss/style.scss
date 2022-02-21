@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import "utils";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-bg-clr: teal;
+  --delete-btn-size: 2rem;
+}
+
+body {
+  height: 100vh;
+  max-height: 100vh;
+  font-family: 'Poppins', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+input, button {
+  font-family: inherit;
+}
+
+#App {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+}
+
+@import "top";
+@import "bottom";

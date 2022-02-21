@@ -1,0 +1,43 @@
+.bottom {
+  overflow-y: auto;
+  
+  ul {
+    user-select: none;
+    list-style: none;
+    gap: 1em;
+    width: 100%;
+    max-width: 500px;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5em;
+      background-color: var(--main-bg-clr);
+      color: white;
+      border-radius: 5px;
+      padding: 0.5em;
+    }
+  }
+}
+
+task-info {
+  overflow-x: hidden;
+  width: calc(100% - var(--delete-btn-size));
+
+  &[data-done="true"] {
+    text-decoration: line-through;
+  }
+
+  div {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+}
+
+.delete-btn {
+  font-size: 1.5em;
+  height: var(--delete-btn-size);
+  width: var(--delete-btn-size);
+  cursor: pointer;
+}

@@ -21,14 +21,14 @@ export default class NewTaskForm extends HTMLFormElement {
     }) as HTMLInputElement;
     this.append(
       div({
-        class: "left",
+        class: "left flex nowrap",
         innerHTML: [
           this.textInput,
           this.dateInput
         ]
       }),
       div({
-        class: "right",
+        class: "right grid center",
         innerHTML: button({ type: "submit", innerHTML: "Add" })
       })
     );

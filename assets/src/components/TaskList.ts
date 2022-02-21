@@ -1,6 +1,7 @@
 import App from "../app/App.js";
-import { span, div, li, p } from "../app/element-maker.js";
+import { span, li } from "../app/element-maker.js";
 import { TaskInterface } from "../app/TaskDatabase.js";
+import TaskInfo from "./TaskInfo.js";
 
 export default class TaskList extends HTMLUListElement {
   constructor() {
@@ -9,56 +10,32 @@ export default class TaskList extends HTMLUListElement {
 
   public connectedCallback(): void {
     App.listen(App.EventList.INITIAL_TASKS_DISPATCH, (e: CustomEvent<TaskInterface[]>) => {
-      e.detail.forEach(todo => this.addItem(todo));
+      e.detail.forEach(task => this.addItem(task));
     });
     App.listen(App.EventList.TASK_CREATION, (e: CustomEvent<TaskInterface>) => {
       this.addItem(e.detail);
     });
   }
 
-  private addItem({ timestamp, done, text, dueDate }: TaskInterface): void {
+  private addItem(task: TaskInterface): void {
     this.append(
       li({
-        "data-timestamp": timestamp,
+        "data-timestamp": task.timestamp,
         innerHTML: [
-          div({
-            class: "task-info",
-            "data-done": done ? "true" : "",
-            ondblclick: e => {
-              this.toggleDone(<HTMLElement>e.target, timestamp);
-            },
-            innerHTML: [
-              div(text),
-              p(dueDate),
-            ]
-          }),
+          new TaskInfo(task),
           span({
             class: "delete-btn grid center",
             innerHTML: "×",
-            onclick: e => this.handleDelete(<HTMLElement>e.target, timestamp)
+            onclick: e => this.handleDelete(<HTMLElement>e.target, task.timestamp)
           })
         ]
       })
     );
   }
 
-  private toggleDone(target: HTMLElement, id: number): void {
-    const parent = target.closest(`.task-info`) as HTMLElement;
-    const done = parent.dataset.done === "true";
-    parent.dataset.done = (done) ? "" : "true";
-    App.dispatch(
-      App.EventList.TASK_UPDATE, {
-      id,
-      done: !done
-    });
-  }
-
-  private handleDelete(target: HTMLElement, timestamp: number): void {
+  private handleDelete(target: HTMLElement, id: number): void {
     const parentElement = target.closest("li");
-    App.dispatch(
-      App.EventList.TASK_DELETION,
-      timestamp
-    );
+    App.dispatch(App.EventList.TASK_DELETION, id);
     parentElement.remove();
   }
 }

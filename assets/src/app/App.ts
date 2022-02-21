@@ -28,7 +28,7 @@ const App = (() => {
       await taskDb.addTask(e.detail);
     });
     listen(EventList.TASK_UPDATE, async ({ detail }) => {
-      const task = await taskDb.getTaskById(detail.id) as any;
+      const task = await taskDb.getTaskById(detail.id) as TaskInterface;
       if (!task)
         return;
       await taskDb.updateTask({ ...task, done: detail.done });
