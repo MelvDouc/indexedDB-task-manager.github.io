@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-bg-clr: teal;
+  --delete-btn-size: 2rem;
+}
+
+body {
+  height: 100vh;
+  max-height: 100vh;
+  font-family: 'Poppins', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+input, button {
+  font-family: inherit;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex.nowrap {
+  flex-flow: column nowrap;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid.center {
+  place-items: center;
+}
+
+#App {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+}
+
+.top, .bottom {
+  padding: 1em;
+}
+
+.top {
+  background-color: var(--main-bg-clr);
+}
+
+/* .top form {
+} */
+
+.bottom {
+  overflow-y: auto;
+}
+
+ul[is="task-list"] {
+  user-select: none;
+  list-style: none;
+  gap: 1em;
+  width: 100%;
+  max-width: 500px;
+}
+
+ul[is="task-list"] li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+  background-color: var(--main-bg-clr);
+  color: white;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+
+.task-info {
+  overflow-x: hidden;
+  width: calc(100% - var(--delete-btn-size));
+}
+
+.task-info div {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.task-info[data-done="true"] {
+  text-decoration: line-through;
+}
+
+.delete-btn {
+  font-size: 1.5em;
+  height: var(--delete-btn-size);
+  width: var(--delete-btn-size);
+  cursor: pointer;
+}
