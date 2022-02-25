@@ -1,5 +1,5 @@
 import App from "../app/App.js";
-import { span, li } from "../app/element-maker.js";
+import { li } from "../app/element-maker.js";
 import { TaskInterface } from "../app/TaskDatabase.js";
 import TaskInfo from "./TaskInfo.js";
 
@@ -20,12 +20,7 @@ export default class TaskList extends HTMLUListElement {
   private addItem(task: TaskInterface): void {
     this.append(
       li([
-        new TaskInfo(task),
-        span({
-          class: "delete-btn grid center",
-          innerHTML: "×",
-          onclick: e => this.handleDelete(<HTMLElement>e.target, task.timestamp)
-        })
+        new TaskInfo(task, this.handleDelete.bind(this)),
       ])
     );
   }

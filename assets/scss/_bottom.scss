@@ -16,45 +16,60 @@
     width: 100%;
     max-width: 500px;
 
-    li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.5em;
-      background-color: var(--main-bg-clr);
-      color: white;
-      border-radius: 5px;
-      padding: 0.5em;
-      
-
-      &:hover {
-        filter: hue-rotate(45deg);
+      li {
+        width: 100%;
+        display: flex;
+        border-radius: 5px;
       }
-    }
   }
 }
 
 task-info {
-  overflow-x: hidden;
-  width: calc(100% - var(--delete-btn-size));
-
-  &[data-done="true"] {
-    text-decoration: line-through;
-  }
-
-  div {
-    font-size: 1.1em;
-    font-weight: bold;
-  }
-}
-
-.delete-btn {
-  font-size: 1.5em;
-  height: var(--delete-btn-size);
-  width: var(--delete-btn-size);
-  cursor: pointer;
+  --delete-btn-size: 3em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: var(--main-bg-clr);
 
   &:hover {
-    color: lighten(red, 5%);
+    filter: hue-rotate(45deg);
+  }
+
+  &[data-done="true"] {
+    background-color: rgb(146, 151, 153);
+
+    & > div:first-child {
+      text-decoration: line-through;
+    }
+  }
+
+  & > div:first-child {
+    width: calc(100% - var(--delete-btn-size));
+    padding: 0.66em;
+    max-height: 5em;
+    overflow-y: auto;
+    color: white;
+
+    span {
+      font-weight: bold;
+      border-bottom: 1px solid white;
+      margin-bottom: 0.25em;
+    }
+  }
+
+  & > div:nth-child(2) {
+    width: var(--delete-btn-size);
+    height: var(--delete-btn-size);
+
+    .delete-btn {
+      cursor: pointer;
+      font-size: 1.5em;
+      font-weight: bold;
+
+      &:hover {
+        color: red;
+      }
+    }
   }
 }
