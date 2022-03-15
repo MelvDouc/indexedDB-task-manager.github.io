@@ -17,14 +17,13 @@ export default class TaskDatabase {
                     db.deleteObjectStore(this.storeName);
                 db.createObjectStore(this.storeName, { keyPath: "timestamp" });
                 this.db = db;
-                resolve(true);
             };
             req.onsuccess = (e) => {
                 const db = e.target.result;
                 this.db = db;
                 resolve(true);
             };
-            req.onerror = (e) => reject(e.target.errorCode);
+            req.onerror = reject;
         });
     }
     promisifyRequest(req, getResolveValue) {
@@ -32,7 +31,7 @@ export default class TaskDatabase {
             req.onsuccess = (e) => {
                 return resolve(getResolveValue(e));
             };
-            req.onerror = (e) => reject(e.target.errorCode);
+            req.onerror = reject;
         });
     }
     async getTaskById(id) {

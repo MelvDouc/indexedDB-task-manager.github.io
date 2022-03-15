@@ -1,3 +1,4 @@
 .vscode
-assets/src
-assets/scss
+tsconfig.json
+/assets/src
+/assets/scss
